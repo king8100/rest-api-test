@@ -1,0 +1,279 @@
+Entities & Relationships for Car API:
+
+1. Brand
+Attributes: id, name, country, founder_year
+Relationship: With Model
+
+2. Model 
+Atributtes: id, name, year, brand_id(FK), body_type, engine type
+Relationship: Model -> Brand, Model -> Features
+
+3. Features
+Attributes: id, name, description
+Relationship: Feature -> Model
+
+4. Dealership
+Attributes: id, name, location, contacts 
+Relationship: Dealership -> Brands, Models -> Delaerships
+
+Endpoints for the Car API:
+
+1. Brands - You can manage car brands from it. 
+
+1.1. With GET/brands you can retrieve a list of all car brands available. 
+
+[
+  {
+    "id": 1,
+    "name": "Toyota",
+    "country": "Japan",
+    "founded_year": 1937
+  },
+  {
+    "id": 2,
+    "name": "Ford",
+    "country": "USA",
+    "founded_year": 1903
+  }
+]
+
+
+1.2. GET/brands/ - Get a specific brand by ID
+
+{
+  "id": 1,
+  "name": "Toyota",
+  "country": "Japan",
+  "founded_year": 1937
+}
+
+1.3. POST/brands - Create a new brand
+
+Request: 
+{
+  "name": "Tesla",
+  "country": "USA",
+  "founded_year": 2003
+}
+
+Receive:
+{
+  "id": 3,
+  "name": "Tesla",
+  "country": "USA",
+  "founded_year": 2003
+}
+
+1.4. PUT/brands/ - Update any existing brand
+
+Request: 
+
+{
+  "country": "United States"
+}
+
+Receive: 
+
+{
+  "id": 3,
+  "name": "Tesla",
+  "country": "United States",
+  "founded_year": 2003
+}
+
+1.5 DELETE/brands/
+
+204 No Content
+
+
+2. Models - Manage all of the car models. 
+
+2.1. GET/models 
+
+[
+  {
+    "id": 1,
+    "name": "Corolla",
+    "year": 2022,
+    "body_type": "Sedan",
+    "engine_type": "Hybrid",
+    "brand": {
+      "id": 1,
+      "name": "Toyota"
+    }
+  }
+]
+
+2.2. GET/models/
+
+{
+  "id": 1,
+  "name": "Corolla",
+  "year": 2022,
+  "body_type": "Sedan",
+  "engine_type": "Hybrid",
+  "brand": {
+    "id": 1,
+    "name": "Toyota"
+  }
+}
+
+
+2.3. POST/models - Create new model
+
+Request: 
+
+{
+  "name": "Camry",
+  "year": 2023,
+  "body_type": "Sedan",
+  "engine_type": "Hybrid",
+  "brand_id": 1
+}
+
+Receive: 
+
+{
+  "id": 2,
+  "name": "Camry",
+  "year": 2023,
+  "body_type": "Sedan",
+  "engine_type": "Hybrid",
+  "brand_id": 1
+}
+
+2.4. PUT/models/ - Used for update for an existing model.
+
+Request:
+
+{
+  "year": 2024
+}
+
+Receive: 
+
+{
+  "id": 2,
+  "name": "Camry",
+  "year": 2024,
+  "body_type": "Sedan",
+  "engine_type": "Hybrid",
+  "brand_id": 1
+}
+
+
+2.5. DELETE/models/ - Delete any model. 
+
+3. Features - Manage the features of the cars.
+
+3.1 GET/features - List of all featurs
+
+[
+  {
+    "id": 1,
+    "name": "Sunroof",
+    "description": "Panoramic sunroof"
+  }
+]
+
+
+3.2. GET/features/
+
+
+{
+  "id": 1,
+  "name": "Sunroof",
+  "description": "Panoramic sunroof "
+}
+
+
+3.3. POST/features
+
+Request;
+
+{
+  "name": "Heated Seats",
+  "description": "Front and rear heated seats"
+}
+
+Receive: {
+  "id": 2,
+  "name": "Heated Seats",
+  "description": "Front heated seats"
+}
+
+3.4. PUT/features/ - For update.
+
+Request: 
+
+{
+  "description": "Front heated seats"
+}
+
+Receive: 
+
+{
+  "id": 2,
+  "name": "Heated Seats",
+  "description": "Front seats with heating function"
+}
+
+3.5. DELETE/features/ 
+
+4. Dalership - Manage the sales of cars 
+
+
+4.1  GET/dealership - List of dealerships
+
+[
+  {
+    "id": 1,
+    "name": "AutoNation",
+    "location": "New York, NY",
+    "contact_info": "+1-555-1234"
+  }
+]
+
+4.2. GET/dealerships/ - Search dealer by ID
+
+{
+  "id": 1,
+  "name": "Autodeal",
+  "location": "New York City",
+  "contact_info": "+12341234"
+}
+
+4.3. POST/dealerships - Create new dealership
+
+Request: {
+  "name": "CarMax",
+  "location": "Los Angeles, CA",
+  "contact_info": "+1234-5678"
+}
+
+Receive: 
+{
+  "id": 2,
+  "name": "CarMax",
+  "location": "Los Angeles, CA",
+  "contact_info": "+1-555-5678"
+}
+
+4.4. PUT /dealerships/ Update an existing dealership.
+
+Request: {
+  "location": "San Francisco, CA"
+}
+
+Receive:
+
+{
+  "id": 2,
+  "name": "CarMax",
+  "location": "San Francisco, CA",
+  "contact_info": "+1-2343-5678"
+}
+
+4.5. DELETE /dealerships/ - Delete dealership.
+
+
